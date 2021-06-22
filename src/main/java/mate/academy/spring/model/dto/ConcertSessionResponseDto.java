@@ -7,8 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MovieResponseDto {
+public class ConcertSessionResponseDto {
     private Long id;
-    private String title;
-    private String description;
+    private Long concertId;
+    private Long stageId;
+    private String showTime;
 }

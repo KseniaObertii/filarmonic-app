@@ -3,7 +3,7 @@ package mate.academy.spring.service.impl;
 import java.util.ArrayList;
 import mate.academy.spring.dao.ShoppingCartDao;
 import mate.academy.spring.dao.TicketDao;
-import mate.academy.spring.model.MovieSession;
+import mate.academy.spring.model.ConcertSession;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.Ticket;
 import mate.academy.spring.model.User;
@@ -21,12 +21,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void addSession(MovieSession movieSession, User user) {
+    public void addSession(ConcertSession concertSession, User user) {
         Ticket newTicket = new Ticket();
         newTicket.setUser(user);
-        newTicket.setCinemaHall(movieSession.getCinemaHall());
-        newTicket.setShowTime(movieSession.getShowTime());
-        newTicket.setMovie(movieSession.getMovie());
+        newTicket.setStage(concertSession.getStage());
+        newTicket.setShowTime(concertSession.getShowTime());
+        newTicket.setConcert(concertSession.getConcert());
 
         ShoppingCart shoppingCart = shoppingCartDao.getByUser(user);
         shoppingCart.getTickets().add(ticketDao.add(newTicket));
