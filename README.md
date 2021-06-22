@@ -1,30 +1,27 @@
-# cinema(in progress)
+# Filharmonic(in progress)
 
 In this project used N-tier architecture with DB layer, DAO layer, Service layer, Controllers layer and View layer. <br>
 Project was developed according to SOLID principles with authorization and authentication.
-
-#### UML diagram that describes the relationship between the entities.
-<img src="https://github.com/aleksandr-hrankin/pictures/blob/main/project_cinema_uml.png" alt="project_cinema_uml" width="600"/>
 
 One user will have multiple roles. <br>
 ##### No role: <br>
   - Registration
   - Authorization
-  - View a list of available movies
-  - View the list of cinema halls
+  - View a list of available concerts
+  - View the list of stageg
   - Find session by date
 ##### User: <br>
-  - View a list of available movies
-  - View the list of cinema halls
+  - View a list of available concerts
+  - View the list of stages
   - View order list
   - Find session by date
   - Add sessions to shopping cart
   - Make an order
   - logout
 ##### Admin: <br>
-  - View / add movie
-  - View / add cinema hall
-  - Add movie session
+  - View / add concert
+  - View / add stage
+  - Add concert session
   - Find session by date
   - Find user by email
   - logout
