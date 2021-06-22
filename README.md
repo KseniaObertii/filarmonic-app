@@ -6,13 +6,13 @@ Create controllers:
     - Add cinema hall - POST: /cinema-halls
     - Get all cinema halls - GET: /cinema-halls
 - MovieController
-    - Add a movie - POST: /movies 
+    - Add a concert - POST: /movies 
     - Get all movies - GET: /movies
 - MovieSessionController
-    - Add movie session - POST: /movie-sessions
-    - Get all available movie sessions - GET: /movie-sessions/available?movieId=1&date=29.02.2020
-    - Update movie session - PUT /movie-sessions/{id}
-    - Remove movie session - DELETE /movie-sessions/{id}
+    - Add concert session - POST: /concert-sessions
+    - Get all available concert sessions - GET: /concert-sessions/available?movieId=1&date=29.02.2020
+    - Update concert session - PUT /concert-sessions/{id}
+    - Remove concert session - DELETE /concert-sessions/{id}
 - Expecting to see the DTO objects for request and response in the controllers
 - If some DAO or service methods are absent - implement them.
 

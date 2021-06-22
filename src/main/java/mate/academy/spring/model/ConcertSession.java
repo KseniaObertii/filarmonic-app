@@ -10,18 +10,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "movie_sessions")
-public class MovieSession {
+@Table(name = "concert_sessions")
+public class ConcertSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Movie movie;
+    private Concert concert;
     @ManyToOne(fetch = FetchType.LAZY)
-    private CinemaHall cinemaHall;
+    private Stage stage;
     private LocalDateTime showTime;
 
-    public MovieSession() {
+    public ConcertSession() {
     }
 
     public Long getId() {
@@ -32,20 +32,20 @@ public class MovieSession {
         this.id = id;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public Concert getConcert() {
+        return concert;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setConcert(Concert concert) {
+        this.concert = concert;
     }
 
-    public CinemaHall getCinemaHall() {
-        return cinemaHall;
+    public Stage getStage() {
+        return stage;
     }
 
-    public void setCinemaHall(CinemaHall cinemaHall) {
-        this.cinemaHall = cinemaHall;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public LocalDateTime getShowTime() {
@@ -58,10 +58,10 @@ public class MovieSession {
 
     @Override
     public String toString() {
-        return "MovieSession{"
+        return "ConcertSession{"
                 + "id=" + id
-                + ", movie=" + movie
-                + ", cinemaHall=" + cinemaHall
+                + ", concert=" + concert
+                + ", stage=" + stage
                 + ", showTime=" + showTime
                 + '}';
     }

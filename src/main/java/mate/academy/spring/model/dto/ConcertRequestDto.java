@@ -7,8 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CinemaHallResponseDto {
-    private Long id;
-    private int capacity;
+public class ConcertRequestDto {
+    private String title;
     private String description;
 }

@@ -9,49 +9,50 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import mate.academy.spring.dao.AbstractDao;
-import mate.academy.spring.dao.MovieSessionDao;
+import mate.academy.spring.dao.ConcertSessionDao;
 import mate.academy.spring.exception.DataProcessingException;
-import mate.academy.spring.model.MovieSession;
+import mate.academy.spring.model.ConcertSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements MovieSessionDao {
+public class ConcertSessionDaoImpl extends AbstractDao<ConcertSession>
+        implements ConcertSessionDao {
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59, 59);
 
-    public MovieSessionDaoImpl(SessionFactory sessionFactory) {
+    public ConcertSessionDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
     @Override
-    public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
+    public List<ConcertSession> findAvailableSessions(Long concertId, LocalDate date) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<MovieSession> criteriaQuery =
-                    criteriaBuilder.createQuery(MovieSession.class);
-            Root<MovieSession> root = criteriaQuery.from(MovieSession.class);
-            Predicate moviePredicate = criteriaBuilder.equal(root.get("movie"), movieId);
+            CriteriaQuery<ConcertSession> criteriaQuery =
+                    criteriaBuilder.createQuery(ConcertSession.class);
+            Root<ConcertSession> root = criteriaQuery.from(ConcertSession.class);
+            Predicate concertPredicate = criteriaBuilder.equal(root.get("concert"), concertId);
             Predicate datePredicate = criteriaBuilder.between(root.get("showTime"),
                     date.atStartOfDay(), date.atTime(END_OF_DAY));
-            Predicate allConditions = criteriaBuilder.and(moviePredicate, datePredicate);
+            Predicate allConditions = criteriaBuilder.and(concertPredicate, datePredicate);
             criteriaQuery.select(root).where(allConditions);
-            root.fetch("movie");
-            root.fetch("cinemaHall");
+            root.fetch("concert");
+            root.fetch("stage");
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get available sessions for movie with id: "
-                    + movieId + " for date: " + date, e);
+            throw new DataProcessingException("Can't get available sessions for concert with id: "
+                    + concertId + " for date: " + date, e);
         }
     }
 
     @Override
-    public Optional<MovieSession> get(Long id) {
+    public Optional<ConcertSession> get(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return Optional.ofNullable(session.get(MovieSession.class, id));
+            return Optional.ofNullable(session.get(ConcertSession.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get a movie session by id: " + id, e);
+            throw new DataProcessingException("Can't get a concert session by id: " + id, e);
         }
     }
 
@@ -68,7 +69,7 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't delete movie session by id "
+            throw new DataProcessingException("Can't delete concert session by id "
                     + id + " from DB.", e);
         } finally {
             if (session != null) {
@@ -78,20 +79,20 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
     }
 
     @Override
-    public MovieSession update(MovieSession movieSession) {
+    public ConcertSession update(ConcertSession concertSession) {
         Session session = null;
         Transaction transaction = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.update(movieSession);
+            session.update(concertSession);
             transaction.commit();
-            return movieSession;
+            return concertSession;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't update movie session " + movieSession
+            throw new DataProcessingException("Can't update concert session " + concertSession
                     + " from DB.", e);
         } finally {
             if (session != null) {
