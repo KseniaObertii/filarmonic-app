@@ -8,7 +8,7 @@ One user will have multiple roles. <br>
   - Registration
   - Authorization
   - View a list of available concerts
-  - View the list of stageg
+  - View the list of stages
   - Find session by date
 ##### User: <br>
   - View a list of available concerts
