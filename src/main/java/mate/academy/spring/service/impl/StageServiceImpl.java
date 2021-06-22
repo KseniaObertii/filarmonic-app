@@ -1,30 +1,30 @@
 package mate.academy.spring.service.impl;
 
 import java.util.List;
-import mate.academy.spring.dao.StageService;
+import mate.academy.spring.dao.StageDao;
 import mate.academy.spring.model.Stage;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StageServiceImpl implements mate.academy.spring.service.StageService {
-    private final StageService stageService;
+    private final StageDao stageDao;
 
-    public StageServiceImpl(StageService stageService) {
-        this.stageService = stageService;
+    public StageServiceImpl(StageDao stageDao) {
+        this.stageDao = stageDao;
     }
 
     @Override
     public Stage add(Stage stage) {
-        return stageService.add(stage);
+        return stageDao.add(stage);
     }
 
     @Override
     public Stage get(Long id) {
-        return stageService.get(id).get();
+        return stageDao.get(id).get();
     }
 
     @Override
     public List<Stage> getAll() {
-        return stageService.getAll();
+        return stageDao.getAll();
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.persistence.criteria.CriteriaQuery;
 import mate.academy.spring.dao.AbstractDao;
-import mate.academy.spring.dao.StageService;
+import mate.academy.spring.dao.StageDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.Stage;
 import org.hibernate.Session;
@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class StageDaoImpl extends AbstractDao<Stage> implements StageService {
+public class StageDaoImpl extends AbstractDao<Stage> implements StageDao {
     public StageDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
